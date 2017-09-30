@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.function.Function;
 
 public class Main {
 
@@ -78,14 +80,14 @@ public class Main {
 			for(int i=0; i<temperatura.length()-1; i++) {
 				temperaturaInt += (int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i);
 				if((int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i) < 0) {
-					System.out.print("Tu jest b³¹d");
+					System.out.print("Tu jest bï¿½ï¿½d");
 				}
 			}
 			if(temperatura.charAt(0) != '-'){
 				//System.out.print("Nie ma minusa; ");
 				temperaturaInt += (int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0));
 				if((int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0)) < 0) {
-					System.out.print("Tu jest b³¹d");
+					System.out.print("Tu jest bï¿½ï¿½d");
 				}
 			} else {
 				//System.out.print("Jest minus; ");
@@ -172,9 +174,9 @@ public class Main {
 			
 			printWriter.println("Zadanie 58.1:");
 			printWriter.println();
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 1: " + min1);
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 2: " + min2);
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 3: " + min3);
+			printWriter.println("Najniï¿½sza odnotowana temperatura w stacji 1: " + min1);
+			printWriter.println("Najniï¿½sza odnotowana temperatura w stacji 2: " + min2);
+			printWriter.println("Najniï¿½sza odnotowana temperatura w stacji 3: " + min3);
 			printWriter.flush();
 		};
 		Runnable pp2 = () ->{
@@ -187,7 +189,7 @@ public class Main {
 			printWriter.println();
 			printWriter.println("Zadanie 58.2:");
 			printWriter.println();
-			printWriter.println("Liczba b³êdnych pomiarów: " + ileBlednychPomiarow);
+			printWriter.println("Liczba bï¿½ï¿½dnych pomiarï¿½w: " + ileBlednychPomiarow);
 			printWriter.flush();
 		};
 		Runnable pp3 = () ->{
@@ -247,7 +249,7 @@ public class Main {
 				}
 			}
 			printWriter.println("podpunkt 1:");
-			printWriter.println("Iloœæ liczb maj¹cych dok³adnie 3 ró¿ne nieparzyste czynniki pierwsze: " + ileLiczbSpelniajacychWarunki);
+			printWriter.println("Iloï¿½ï¿½ liczb majï¿½cych dokï¿½adnie 3 rï¿½ne nieparzyste czynniki pierwsze: " + ileLiczbSpelniajacychWarunki);
 			printWriter.flush();
 		};
 		Runnable pp2 = () -> {
@@ -262,7 +264,7 @@ public class Main {
 			}
 			printWriter.println();
 			printWriter.println("podpunkt 2:");
-			printWriter.println("Iloœæ palindromów: " + ilePalindromow);
+			printWriter.println("Iloï¿½ï¿½ palindromï¿½w: " + ilePalindromow);
 			printWriter.flush();
 		};
 		Runnable pp3 = () ->{
@@ -293,7 +295,7 @@ public class Main {
 			printWriter.println();
 			printWriter.println("podpunkt 3:");
 			for(int i=1; i<=8; i++) {
-				printWriter.println("Iloœæ liczb o mocy: " + i +  " wynosi " + moc_liczby.get(i).size());
+				printWriter.println("Iloï¿½ï¿½ liczb o mocy: " + i +  " wynosi " + moc_liczby.get(i).size());
 			}
 			printWriter.println("Minimalna liczba o mocy 1: " + Collections.min(moc_liczby.get(1)));
 			printWriter.print("Maksymalna liczba o mocy 1: " + Collections.max(moc_liczby.get(1)));
@@ -327,7 +329,7 @@ public class Main {
 				}
 			}
 			printWriter.println("Podpunkt 1: ");
-			printWriter.println("Iloœæ liczb mniejszych od 1000: " + ileMniejszychOd1000);
+			printWriter.println("Iloï¿½ï¿½ liczb mniejszych od 1000: " + ileMniejszychOd1000);
 			printWriter.println("Dwie ostatnie liczby: " + przedostatnia + ", " + ostatnia);
 			printWriter.flush();
 			
@@ -380,7 +382,7 @@ public class Main {
 				if(czyJestWzgledniePierwsza) {
 					printWriter.println();
 					printWriter.println("Podpunkt 3: ");
-					printWriter.print("Najwiêksza wzglêdnie pierwsza liczba to: " + liczba);
+					printWriter.print("Najwiï¿½ksza wzglï¿½dnie pierwsza liczba to: " + liczba);
 					printWriter.flush();
 					break;
 				}	
@@ -436,8 +438,8 @@ public class Main {
 			}
 			
 			printWriter.println("Podpunkt 1:");
-			printWriter.println("Iloœæ ci¹gów arytmetycznych: " + ciagiArytmetyczne.size());
-			printWriter.println("Maksymalna ró¿nica ci¹gu arytmetycznego: " + maxRoznica);
+			printWriter.println("Iloï¿½ï¿½ ciï¿½gï¿½w arytmetycznych: " + ciagiArytmetyczne.size());
+			printWriter.println("Maksymalna rï¿½nica ciï¿½gu arytmetycznego: " + maxRoznica);
 			printWriter.flush();
 		};
 		Runnable pp2 = () ->{
@@ -455,7 +457,92 @@ public class Main {
 		pp2.run();
 		pp3.run();
 	}
-	
+	private static void zadanie62() throws Exception {
+		Scanner plik1 = new Scanner(new File("Files/62/liczby1.txt"));
+		Scanner plik2 = new Scanner(new File("Files/62/liczby2.txt"));
+		
+		ArrayList<String> osemkowe = new ArrayList<String>();
+		ArrayList<Integer> osemkoweInt = new ArrayList<Integer>();
+		ArrayList<Integer> dziesietneInt = new ArrayList<Integer>();
+		
+		while(plik1.hasNext()) {
+			String next = plik1.next();
+			osemkoweInt.add(Integer.parseInt(next, 8));
+			osemkowe.add(next);
+		}
+		while(plik2.hasNext()) {
+			dziesietneInt.add(Integer.parseInt(plik2.next()));
+		}
+		 
+		Runnable pp1 = () -> {
+			Collections.sort(osemkoweInt);
+			String max = Integer.toString(osemkoweInt.get(osemkoweInt.size() - 1), 8);
+			String min = Integer.toString(osemkoweInt.get(0), 8);
+			
+			System.out.println("Min: " + min);
+			System.out.println("Max: " + max);
+		};
+		Runnable pp2 = () -> {
+			ArrayList<ArrayList<Integer>> ciagiMalejace = new ArrayList<ArrayList<Integer>>();
+			ArrayList<Integer> aktualnyCiagMalejacy = new ArrayList<Integer>();
+			
+			aktualnyCiagMalejacy.add(dziesietneInt.get(0));
+			
+			for(int i=1; i<dziesietneInt.size(); i++) {
+				int liczba = dziesietneInt.get(i);
+				if(aktualnyCiagMalejacy.size() == 0 || liczba >= aktualnyCiagMalejacy.get(aktualnyCiagMalejacy.size()-1)) {
+					aktualnyCiagMalejacy.add(liczba);
+				} else { // koniec ciagu
+					ciagiMalejace.add(aktualnyCiagMalejacy);
+					aktualnyCiagMalejacy = new ArrayList<Integer>(); 
+					aktualnyCiagMalejacy.add(liczba);
+				}
+			}
+			// znalezienie najdluzszego ciagu:
+			ArrayList<Integer> najdluzszyCiagMalejacy = ciagiMalejace.get(0);
+			for(int i=0; i<ciagiMalejace.size(); i++) {
+				if(ciagiMalejace.get(i).size() > najdluzszyCiagMalejacy.size()) {
+					najdluzszyCiagMalejacy = ciagiMalejace.get(i);
+				}
+			}
+			
+			System.out.println(najdluzszyCiagMalejacy);
+		};
+		Runnable pp3 = () -> {
+			ArrayList<Integer> wierszeWKtorychLiczbySaTakieSame = new ArrayList<Integer>();
+			ArrayList<Integer> wierszeWKtorychLiczba1JestWieksza = new ArrayList<Integer>();
+			
+			for(int i=0; i<dziesietneInt.size(); i++) {
+				int osemkowaInt = Integer.parseInt(osemkowe.get(i), 8);
+				int dziesietnaInt = dziesietneInt.get(i);
+				if(osemkowaInt == dziesietnaInt) {
+					wierszeWKtorychLiczbySaTakieSame.add(i + 1);
+				} else if(dziesietnaInt > osemkowaInt) {
+					wierszeWKtorychLiczba1JestWieksza.add(i + 1);
+				}
+			}
+			System.out.println("Ilosc wierszy w ktorych liczby sa takie same: " + wierszeWKtorychLiczbySaTakieSame.size());
+			System.out.println("Ilosc wierszy w ktorych liczba1 jest wiÄ™ksza: " + wierszeWKtorychLiczba1JestWieksza.size());
+		};
+		Runnable pp4 = () -> {
+			int ileRazy6 = 0;
+			int ileRazy6wZapisie8 = 0;
+			for(int i=0; i<1000; i++) {
+				String liczba = dziesietneInt.get(i) + "";
+				ileRazy6 += liczba.length() - liczba.replaceAll("6", "").length();
+				String liczba8 = Integer.toString(dziesietneInt.get(i), 8);
+				ileRazy6wZapisie8 += liczba8.length() - liczba8.replaceAll("6", "").length();
+			}
+			System.out.println("Ilosc 6: " + ileRazy6);
+			System.out.println("Ilosc 6 gdy zapiszemy liczby osemkowo: " + ileRazy6wZapisie8);
+		};
+		
+		pp1.run();
+		pp2.run();
+		pp3.run();
+		pp4.run();
+		
+	}
 	
 	public static void main(String[] args) {
 		try {
@@ -463,6 +550,7 @@ public class Main {
 //			zadanie59();
 //			zadanie60();
 			zadanie61();
+			zadanie62();
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}

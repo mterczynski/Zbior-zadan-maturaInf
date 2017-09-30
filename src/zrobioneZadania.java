@@ -16,10 +16,10 @@ public enum zrobioneZadania {
 	_61_2(false),
 	_61_3(false),
 	
-	_62_1(false),
-	_62_2(false),
-	_62_3(false),
-	_62_4(false),
+	_62_1(true),
+	_62_2(true),
+	_62_3(false), // zly wynik
+	_62_4(false), // zly wynik?, chyba blad w odpowiedziach
 	
 	_63_1(false),
 	_63_2(false),
