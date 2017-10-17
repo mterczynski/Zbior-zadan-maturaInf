@@ -107,11 +107,22 @@ public class Main {
 			System.out.println("Ilość dni rekordowych: " + ileDniRekordowych);
 		};
 		Runnable pp4 = () -> {
+			int maxSkok = 0;	
+			
 			for(int i=0; i<temperatury1.size(); i++) {
-				for(int j=i; i<temperatury1.size(); j++) {
-					
+				for(int j=i+1; j<temperatury1.size(); j++) {
+					int kwadrat = (int)Math.pow(temperatury1.get(i) - temperatury1.get(j), 2);
+					int roznica = j - i;
+					double skokNiezaokroglony = (double)kwadrat / (double)roznica;
+					int skok = (int) Math.ceil(skokNiezaokroglony);
+					//System.out.println(skok);
+					if(skok > maxSkok) {
+						maxSkok = skok;
+					}
 				}
 			}
+			
+			System.out.println("Zadanie 58.4: Max. skok temperatury to " + maxSkok);
 		};
 		
 		pp1.run();
@@ -668,7 +679,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-//			zadanie58();
+			zadanie58();
 //			zadanie59();
 //			zadanie60();
 //			zadanie61();
