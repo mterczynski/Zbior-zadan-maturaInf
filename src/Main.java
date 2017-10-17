@@ -1,9 +1,11 @@
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -523,58 +527,145 @@ public class Main {
 		pp2.run();
 		pp3.run();
 	}
+
+	public static void zadanie81() throws Exception { // Czworokąty
+
+		Scanner plik_dane = new Scanner(new File("Files/81/wspolrzedne.txt"));
+		Scanner plik_daneTR = new Scanner(new File("Files/81/wspolrzedneTR.txt"));
+
+		ArrayList<ArrayList<Point>> dane_wiersze = new ArrayList<ArrayList<Point>>();		
+		ArrayList<ArrayList<Point>> dane_wierszeTR = new ArrayList<ArrayList<Point>>();		
+
+
+		while(plik_dane.hasNext()) {	
+			ArrayList<Point> linia = new ArrayList<Point>();
+			for(int i=0; i<3; i++) {
+				linia.add(new Point(plik_dane.nextInt(), plik_dane.nextInt()));
+			}
+			dane_wiersze.add(linia);
+		}
+
+		while(plik_daneTR.hasNext()) {
+			ArrayList<Point> linia = new ArrayList<Point>();
+			for(int i=0; i<3; i++) {
+				linia.add(new Point(plik_daneTR.nextInt(), plik_daneTR.nextInt()));
+			}
+			dane_wierszeTR.add(linia);
+		}
+
+		Runnable pp1 = () -> {
+			int ileWierszy = 0;
+
+			for(int i=0; i<dane_wiersze.size(); i++) {
+				boolean czyWierszWCwiartce = true;		
+				for(int j=0; j<3; j++) {
+					Point punkt = dane_wiersze.get(i).get(j);
+					if(!(punkt.getX() > 0 && punkt.getY() > 0)) {
+						czyWierszWCwiartce = false;
+					}
+				}
+				if(czyWierszWCwiartce) {
+					ileWierszy++;
+				}
+			}
+
+			System.out.println("Zadanie 81.1: " + ileWierszy);
+		};
+		Runnable pp2 = () -> {
+
+			int ileProstych = 0;
+
+			for(int i=0; i<dane_wiersze.size(); i++) {
+				Point a = dane_wiersze.get(i).get(0);
+				Point b = dane_wiersze.get(i).get(1);
+				Point c = dane_wiersze.get(i).get(2);
+
+				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
+				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
+
+				if(tgAB == tgAC) {
+					ileProstych++;
+				}
+			}
+
+			System.out.println("Zadanie 81.2: " + ileProstych);
+		};
+		Runnable pp3 = () -> {
+			double maxObw = 0d;
+			Point maxA = new Point();
+			Point maxB = new Point();
+			Point maxC = new Point();
+			for(int i=0; i<dane_wierszeTR.size(); i++) {
+
+				Point a = dane_wierszeTR.get(i).get(0);
+				Point b = dane_wierszeTR.get(i).get(1);
+				Point c = dane_wierszeTR.get(i).get(2);
+
+				double obw = a.distance(b) + a.distance(c) + b.distance(c);
+				if(obw > maxObw) {
+					maxObw = obw;
+					maxA = a;
+					maxB = b;
+					maxC = c;
+				}
+				//int obwod = Math.hypot(a.get, y) 
+			}
+
+			Function<Point, String> formatPoint = (Point a) ->{
+				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
+			};
+
+			new DecimalFormat("#.");
+			Pattern a;
+			System.out.println("Zadanie 81.3: ");
+			System.out.println("Max obwód: " + String.format("%.2f", maxObw));
+			System.out.println("Max obwód: " + new DecimalFormat("#.##").format(maxObw));
+
+			System.out.println("Trójkąt: " + formatPoint.apply(maxA) + ", " + formatPoint.apply(maxB) + ", " + formatPoint.apply(maxC));
+		};
+		Runnable pp4 = () -> {
+			int ileProst = 0;
+
+			for(int i=0; i<dane_wierszeTR.size(); i++) {
+				ArrayList<Point> wiersz = dane_wierszeTR.get(i);
+				//if(wiersz.get(0))
+				double bokA = wiersz.get(0).distance(wiersz.get(1));
+				double bokB = wiersz.get(0).distance(wiersz.get(2));
+				double bokC = wiersz.get(1).distance(wiersz.get(2));
+
+
+				boolean czyProst = false;
+				if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				} else if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				} else if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				}
+				if(czyProst) {
+					ileProst++;
+				}
+
+			}
+
+			System.out.println("Zadanie 81.4: " + ileProst);
+		};
+		Runnable pp5 = () -> {
+
+		};
+
+		pp1.run();
+		pp2.run();
+		pp3.run();
+		pp4.run();
+		pp5.run();
+	}
 	
 	private static void test() throws Exception {
-		// Streams example 1:
-		
-		List<String> stringi = new ArrayList<String>();
-		Collections.addAll(stringi, "1", "2", "3");
-		stringi.addAll(Arrays.asList("2","3","4444"));
-		
-		List<String> noweStringi = stringi.stream().map((String el)->{
-			return el + " siema";
-		}).collect(Collectors.toList());
-		
-		//System.out.println(noweStringi);
-		
-		// Streams example 2:
-		
-		List<Integer> liczby = new ArrayList<Integer>();
-		
-		for(int i=0; i<100; i++) {
-			liczby.add(i);
-		}
-		
-		List<Integer> filtered = liczby.stream().filter((Integer a)->{
-			return (a >= 80 && a %2 == 0);
-		}).collect(Collectors.toList());
-		
-		//System.out.println(filtered);
-		
-		// Streams example 3:
-		
-		List<BigInteger> duzeLiczby = new ArrayList<BigInteger>();
-		
-		for(int i=0; i<10; i++) {
-			Random r = new Random();
-			duzeLiczby.add(BigInteger.valueOf(r.nextInt(6) + 1));
-		}
-		
-		List<BigInteger> duzeLiczbyResult = duzeLiczby.stream().sorted().distinct().collect(Collectors.toList());
-		
-		System.out.println(duzeLiczbyResult);
-		
-		person<String> adam = () -> {
-			return "Hello Adam";
-		};
-		
 	}
 	
-	@FunctionalInterface
-	interface person<T>{
-		T getData();
-	}
 	
+
 	public static void main(String[] args) {
 		try {
 //			zadanie58();
