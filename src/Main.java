@@ -1,16 +1,19 @@
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.NavigableMap;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -20,187 +23,98 @@ public class Main {
 		Scanner plik_dane2 = new Scanner(new File("Files/58/dane_systemy2.txt"));
 		Scanner plik_dane3 = new Scanner(new File("Files/58/dane_systemy3.txt"));
 		
-		PrintWriter printWriter = new PrintWriter(new File("rozwiazania/58.txt"));
+		ArrayList<Integer> temperatury1 = new ArrayList<Integer>();
+		ArrayList<Integer> temperatury2 = new ArrayList<Integer>();
+		ArrayList<Integer> temperatury3 = new ArrayList<Integer>();
 		
-		class Pomiar{
-			public int temperatura;
-			public int czas;
-		}
-		
-		ArrayList<Pomiar> pomiary1 = new ArrayList<Pomiar>();
-		ArrayList<Pomiar> pomiary2 = new ArrayList<Pomiar>();
-		ArrayList<Pomiar> pomiary3 = new ArrayList<Pomiar>();
+		ArrayList<Integer> czasy1 = new ArrayList<Integer>();
+		ArrayList<Integer> czasy2 = new ArrayList<Integer>();
+		ArrayList<Integer> czasy3 = new ArrayList<Integer>();
 		
 		while(plik_dane1.hasNext()) {
-			String czas = plik_dane1.next();
-			String temperatura = plik_dane1.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				if(czas.charAt(czas.length()-1-i) == '1') {
-					czasInt += (int)Math.pow(2, i);
-				}
-			}
-			
-			
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				if(temperatura.charAt(temperatura.length()-1-i) == '1') {
-					temperaturaInt += (int)Math.pow(2, i);
-				}
-			}
-			if(temperatura.charAt(0) == '1'){
-				temperaturaInt += (int)Math.pow(2, temperatura.length()-1);
-			} else if(temperatura.charAt(0) == '-'){
-				temperaturaInt *= -1;
-			}
-			
-			
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary1.add(pomiar);
+			int czas = Integer.parseInt(plik_dane1.next(), 2);
+			int temperatura = Integer.parseInt(plik_dane1.next(), 2);
+			temperatury1.add(temperatura);
+			czasy1.add(czas);
 		}
-		
 		while(plik_dane2.hasNext()) {
-			String czas = plik_dane2.next();
-			String temperatura = plik_dane2.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				czasInt += (int)Math.pow(4, i) * Character.getNumericValue(czas.charAt(czas.length()-1-i));
-			}
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				temperaturaInt += (int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i);
-				if((int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i) < 0) {
-					System.out.print("Tu jest b��d");
-				}
-			}
-			if(temperatura.charAt(0) != '-'){
-				//System.out.print("Nie ma minusa; ");
-				temperaturaInt += (int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0));
-				if((int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0)) < 0) {
-					System.out.print("Tu jest b��d");
-				}
-			} else {
-				//System.out.print("Jest minus; ");
-				//System.out.print(temperaturaInt + ";;;");
-				//temperaturaInt *= -1;
-				//System.out.print(temperaturaInt);
-			}
-			
-			//System.out.println("temperaturaInt: " + temperaturaInt  + ", temperaturaStr: " + temperatura  + ", char at 0: " + temperatura.charAt(0));
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary2.add(pomiar);
+			int czas = Integer.parseInt(plik_dane2.next(), 4);
+			int temperatura = Integer.parseInt(plik_dane2.next(), 4);
+			temperatury2.add(temperatura);
+			czasy2.add(czas);
 		}
-		
 		while(plik_dane3.hasNext()) {
-			String czas = plik_dane3.next();
-			String temperatura = plik_dane3.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				czasInt += (int)Math.pow(8, i) * Character.getNumericValue(czas.charAt(czas.length()-1-i));
-			}
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				temperaturaInt += (int)Math.pow(8, i) * Character.getNumericValue(temperatura.length()-1-i);
-			}
-			if(temperatura.charAt(0) != '-'){
-				temperaturaInt += (int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0));
-			} else {
-				temperaturaInt *= -1;
-			}
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary3.add(pomiar);
+			int czas = Integer.parseInt(plik_dane3.next(), 8);
+			int temperatura = Integer.parseInt(plik_dane3.next(), 8);
+			temperatury3.add(temperatura);
+			czasy3.add(czas);
 		}
 		
-		Runnable pp1 = () ->{
-			int min1 = 999;
-			int min2 = 999;
-			int min3= 999;
+		double d = 1d/60d;
+		int a = (int) (300 * d);
+		int b = (int) (-300 * d);
+		
+		
+		System.out.println(d);
+		System.out.println(a);
+		System.out.println(b);
+		
+		Runnable pp1 = () -> {
+			ArrayList<Integer> temperatury1Cp = new ArrayList<Integer>(temperatury1);
+			ArrayList<Integer> temperatury2Cp = new ArrayList<Integer>(temperatury2);
+			ArrayList<Integer> temperatury3Cp = new ArrayList<Integer>(temperatury3);
 			
-			for(Pomiar pomiar : pomiary1) {
-				//System.out.println(pomiar.temperatura );
-				if(pomiar.temperatura < min1) {
-					min1 = pomiar.temperatura;
+			Collections.sort(temperatury1Cp);
+			Collections.sort(temperatury2Cp);
+			Collections.sort(temperatury3Cp);
+			
+			System.out.println("Najniższy wynik stacji 1: " + Integer.toString(temperatury1Cp.get(0), 2));
+			System.out.println("Najniższy wynik stacji 2: " + Integer.toString(temperatury2Cp.get(0), 2));
+			System.out.println("Najniższy wynik stacji 3: " + Integer.toString(temperatury3Cp.get(0), 2));
+		};
+		Runnable pp2 = () -> {
+			int ileBlednychWeWszystkich3 = 0;
+			for(int i=0; i<czasy1.size(); i++) {
+				if(czasy1.get(i) % 12 !=0 && czasy2.get(i) % 12 !=0 && czasy3.get(i) % 12 !=0) {
+					ileBlednychWeWszystkich3++;
 				}
 			}
-			for(Pomiar pomiar2 : pomiary2) {
-				if(pomiar2.temperatura < min2) {
-					min2 = pomiar2.temperatura;
-				}			
-			}
-			for(Pomiar pomiar3 : pomiary3) {
-				if(pomiar3.temperatura < min3) {
-					min3 = pomiar3.temperatura;
+			System.out.println("Ilość błędnych pomiarów we wszystkich 3 stacjach w tym samym czasie: " + ileBlednychWeWszystkich3);
+		};
+		Runnable pp3 = () -> {
+			int rekord1 = -1000;
+			int rekord2 = -1000;
+			int rekord3 = -1000;
+			int ileDniRekordowych = 0;
+			for(int i=0; i<temperatury1.size(); i++) {
+				if(temperatury1.get(i) > rekord1 || temperatury2.get(i) > rekord2 || temperatury3.get(i) > rekord3) {
+					ileDniRekordowych++;
+				}
+				if(temperatury1.get(i) > rekord1) {
+					rekord1 = temperatury1.get(i);
+				}
+				if(temperatury2.get(i) > rekord2) {
+					rekord2 = temperatury2.get(i);
+				}
+				if(temperatury3.get(i) > rekord3) {
+					rekord3 = temperatury3.get(i);
 				}
 			}
-			
-			//System.out.println(pomiary1);
-			//System.out.println(pomiary2);
-			//System.out.println(pomiary3);
-			
-			String min1Binarnie = Integer.toBinaryString(Math.abs(min1));
-			String min2Binarnie = Integer.toBinaryString(Math.abs(min2));
-			String min3Binarnie = Integer.toBinaryString(Math.abs(min3));
-			
-			if(min1<0) {
-				min1Binarnie = "-" + min1Binarnie;
-			}
-			if(min2<0) {
-				min2Binarnie = "-" + min2Binarnie;	
-			}
-			if(min3<0) {
-				min3Binarnie = "-" + min3Binarnie;
-			}
-			
-			printWriter.println("Zadanie 58.1:");
-			printWriter.println();
-			printWriter.println("Najni�sza odnotowana temperatura w stacji 1: " + min1);
-			printWriter.println("Najni�sza odnotowana temperatura w stacji 2: " + min2);
-			printWriter.println("Najni�sza odnotowana temperatura w stacji 3: " + min3);
-			printWriter.flush();
+			System.out.println("Ilość dni rekordowych: " + ileDniRekordowych);
 		};
-		Runnable pp2 = () ->{
-			int ileBlednychPomiarow = 0;
-			for(int i=0; i<pomiary1.size(); i++) {
-				if(pomiary1.get(i).czas != pomiary2.get(i).czas || pomiary1.get(i).czas != pomiary3.get(i).czas) {
-					ileBlednychPomiarow++;
+		Runnable pp4 = () -> {
+			for(int i=0; i<temperatury1.size(); i++) {
+				for(int j=i; i<temperatury1.size(); j++) {
+					
 				}
 			}
-			printWriter.println();
-			printWriter.println("Zadanie 58.2:");
-			printWriter.println();
-			printWriter.println("Liczba b��dnych pomiar�w: " + ileBlednychPomiarow);
-			printWriter.flush();
-		};
-		Runnable pp3 = () ->{
-		};
-		Runnable pp4 = () ->{
 		};
 		
 		pp1.run();
 		pp2.run();
 		pp3.run();
 		pp4.run();
+		
 	}
 	private static void zadanie59() throws Exception {
 		
@@ -543,14 +457,134 @@ public class Main {
 		pp4.run();
 		
 	}
+	private static void zadanie63() throws Exception {
+		Scanner plikCiagi = new Scanner(new File("Files/63/ciagi.txt"));
+		ArrayList<String> ciagi = new ArrayList<String>();		
+		
+		while(plikCiagi.hasNext()) {
+			ciagi.add(plikCiagi.next());
+		}
+		
+		Runnable pp1 = () -> {
+			ArrayList<String> ciagiDwucykliczne = new ArrayList<String>();	
+			for(String ciag: ciagi) {
+				if(ciag.length() % 2 == 0) {
+					if(ciag.substring(0, ciag.length()/2).equals(ciag.substring(ciag.length()/2, ciag.length()))) {
+						ciagiDwucykliczne.add(ciag);
+					}
+				}
+			}
+			System.out.println(ciagiDwucykliczne);
+		};
+		Runnable pp2 = () -> {
+			int ileBezDwochJedynekObokSiebie = 0;
+			for(String ciag: ciagi) {
+				boolean czySpelniaWarunek = true;
+				for(int i=0; i<ciag.length()-1; i++) {
+					if(ciag.charAt(i) == '1' && ciag.charAt(i+1) == '1') {
+						czySpelniaWarunek = false;
+					}
+				}
+				if(czySpelniaWarunek) {
+					ileBezDwochJedynekObokSiebie++;
+				}
+			}
+			System.out.println(ileBezDwochJedynekObokSiebie);
+		};
+		Runnable pp3 = () -> {
+			
+		};
+		pp1.run();
+		pp2.run();
+		pp3.run();
+	}
+	private static void zadanie64() throws Exception {
+		BufferedReader plik_obrazki = Files.newBufferedReader(Paths.get("Files/64/dane_obrazki.txt"));
+		ArrayList<ArrayList<Integer>> obrazki = new ArrayList<ArrayList<Integer>>();
+		
+		List<String> lines = plik_obrazki.lines().collect(Collectors.toList());
+//		while(plik_obrazki.hasNext()) {
+//			ArrayList<Integer> obrazek = new ArrayList<Integer>();
+////			for(int i=0; i<36; i++) {
+////				obrazek.add(plik_obrazki.nextInt());
+////			}
+//		}
+		
+		Runnable pp1 = () -> {
+			
+		};
+		Runnable pp2 = () -> {
+			
+		};
+		Runnable pp3 = () -> {
+			
+		};
+		pp1.run();
+		pp2.run();
+		pp3.run();
+	}
+	
+	private static void test() throws Exception {
+		// Streams example 1:
+		
+		List<String> stringi = new ArrayList<String>();
+		Collections.addAll(stringi, "1", "2", "3");
+		stringi.addAll(Arrays.asList("2","3","4444"));
+		
+		List<String> noweStringi = stringi.stream().map((String el)->{
+			return el + " siema";
+		}).collect(Collectors.toList());
+		
+		//System.out.println(noweStringi);
+		
+		// Streams example 2:
+		
+		List<Integer> liczby = new ArrayList<Integer>();
+		
+		for(int i=0; i<100; i++) {
+			liczby.add(i);
+		}
+		
+		List<Integer> filtered = liczby.stream().filter((Integer a)->{
+			return (a >= 80 && a %2 == 0);
+		}).collect(Collectors.toList());
+		
+		//System.out.println(filtered);
+		
+		// Streams example 3:
+		
+		List<BigInteger> duzeLiczby = new ArrayList<BigInteger>();
+		
+		for(int i=0; i<10; i++) {
+			Random r = new Random();
+			duzeLiczby.add(BigInteger.valueOf(r.nextInt(6) + 1));
+		}
+		
+		List<BigInteger> duzeLiczbyResult = duzeLiczby.stream().sorted().distinct().collect(Collectors.toList());
+		
+		System.out.println(duzeLiczbyResult);
+		
+		person<String> adam = () -> {
+			return "Hello Adam";
+		};
+		
+	}
+	
+	@FunctionalInterface
+	interface person<T>{
+		T getData();
+	}
 	
 	public static void main(String[] args) {
 		try {
 //			zadanie58();
 //			zadanie59();
 //			zadanie60();
-			zadanie61();
-			zadanie62();
+//			zadanie61();
+//			zadanie62();
+//			zadanie63();
+//			zadanie64();
+			test();
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}

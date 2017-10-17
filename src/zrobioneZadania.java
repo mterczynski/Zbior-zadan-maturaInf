@@ -1,7 +1,7 @@
 public enum zrobioneZadania {
-    _58_1(false),
-	_58_2(false),
-	_58_3(false),
+    _58_1(true),
+	_58_2(true),
+	_58_3(true),
 	_58_4(false),
 	
 	_59_1(true),
@@ -18,11 +18,11 @@ public enum zrobioneZadania {
 	
 	_62_1(true),
 	_62_2(true),
-	_62_3(false), // zly wynik
+	_62_3(false), // zly wynik?
 	_62_4(false), // zly wynik?, chyba blad w odpowiedziach
 	
-	_63_1(false),
-	_63_2(false),
+	_63_1(true),
+	_63_2(true),
 	_63_3(false),
 	
 	_64_1(false),
