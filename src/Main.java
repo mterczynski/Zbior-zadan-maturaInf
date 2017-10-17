@@ -1,14 +1,21 @@
+import java.awt.Point;
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.NavigableMap;
+import java.util.List;
 import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.Set;
+import java.util.Stack;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -455,14 +462,369 @@ public class Main {
 		pp2.run();
 		pp3.run();
 	}
+	private static void zadanie62() throws Exception {
+		Scanner plik1 = new Scanner(new File("Files/62/liczby1.txt"));
+		Scanner plik2 = new Scanner(new File("Files/62/liczby2.txt"));
+		
+		ArrayList<String> osemkowe = new ArrayList<String>();
+		ArrayList<Integer> osemkoweInt = new ArrayList<Integer>();
+		ArrayList<String> dziesietne = new ArrayList<String>();
+		ArrayList<Integer> dziesietneInt = new ArrayList<Integer>();
+		
+		while(plik1.hasNext()) {
+			String next = plik1.next();
+			Integer osemkowaInt = 0;
+			for(int i=next.length()-1; i>0; i--) {
+				osemkowaInt += (int)(Math.pow(8, i)) * Integer.parseInt(next.charAt(i) + "");
+			}
+			osemkoweInt.add(osemkowaInt);
+			
+			osemkowe.add(plik1.next());
+		}
+		while(plik2.hasNext()) {
+			String next = plik2.next();
+			dziesietne.add(next);
+			dziesietneInt.add(Integer.parseInt(next));
+		}
+		
+		Runnable pp1 = () -> {
+			Collections.sort(osemkowe);
+			int max = osemkoweInt.get(0);
+			int min = osemkoweInt.get(osemkoweInt.size() - 1);
+			
+			System.out.println("Min: " + min);
+			System.out.println("Max: " + max);
+		};
+		Runnable pp2 = () -> {
+//			int maxDlugoscCiagu = 0;
+//			ArrayList<Integer> najdluzszyCiagMalejacy = new ArrayList<Integer>();
+//			ArrayList<Integer> ciagMalejacy = new ArrayList<Integer>();
+//			for(int i=0; i<dziesietneInt.size(); i++) {
+//				if(ciagMalejacy.size() == 0) {
+//					ciagMalejacy.add(dziesietneInt.get(i));
+//				} else if(dziesietneInt.get(i) < ciagMalejacy.get(ciagMalejacy.size() - 1)) {
+//					ciagMalejacy.add(dziesietneInt.get(i));
+//				} else {
+//					ciagMalejacy = new ArrayList<Integer>();
+//					ciagMalejacy.add(dziesietneInt.get(i));
+//				}
+//				if(ciagMalejacy.size() > maxDlugoscCiagu) {
+//					najdluzszyCiagMalejacy = (ArrayList<Integer>) ciagMalejacy.clone();
+//					maxDlugoscCiagu = ciagMalejacy.size();
+//				}
+//			}
+			
+//			System.out.println(najdluzszyCiagMalejacy);
+//			
+//			System.out.println("Max d³ugoœæ ci¹gu: " + maxDlugoscCiagu);
+		};
+		Runnable pp3 = () -> {
+			
+		};
+		Runnable pp4 = () -> {
+			int ile6 = 0;
+			int ile6w8 = 0;
+			for(int liczba: dziesietneInt) {
+				int liczba8 = 0;
+				
+			}
+		};
+		
+		pp1.run();
+		pp2.run();
+		pp3.run();
+		pp4.run();
+		consumer.accept("d");
+		runnable.run();
+		Swimmable<String> swimService = (String a) -> {
+			// do something
+		};
+		
+		swimService.swim("Hi");
+		
+		BiFunction<String,String,String> addStrings = (String a, String b) -> {
+			return a + b;
+		};
+		
+		String result = addStrings.apply("Hi ", "Mark");
+	}
+	static Consumer<String> consumer = (String b)->{
+		
+	};
+	static Runnable runnable = () ->{
+		
+	};
 	
+	@FunctionalInterface
+	interface Swimmable<T> {
+		void swim(T t);
+	}
+	
+	
+	public static void zadanie69() throws Exception {
+		Scanner plik_geny = new Scanner(new File("Files/69/dane_geny.txt"));
+		
+		ArrayList<String> genotypy = new ArrayList<String>();
+		
+		while(plik_geny.hasNext()) {
+			genotypy.add(plik_geny.next());
+		}
+		
+		Runnable pp1 = () ->{
+//			TreeMap<String, Integer> genotyp_ilosc = new TreeMap<String, Integer>();
+//			for(int i=0; i<genotypy.size(); i++) {
+//				String genotyp = genotypy.get(i);
+//				Integer iloscZGatunku = genotyp_ilosc.get(genotyp);
+//				if(iloscZGatunku == null){
+//					genotyp_ilosc.put(genotyp, 0);
+//				} else {
+//					genotyp_ilosc.put(genotyp, iloscZGatunku+1);
+//				}
+//			}
+//			int max = 0;
+//			for(Map.Entry<String, Integer> entry : genotyp_ilosc.entrySet()) {
+//				if(entry.getValue() > max) {
+//					max = entry.getValue();
+//				}
+//			}
+//			System.out.println("Iloœæ gatunków: " + genotyp_ilosc.size());
+//			System.out.println("Max iloœæ  osobników w jednym gatunku: " + max);
+			
+			for(int i=0; i<genotypy.size(); i++) {
+				
+				
+				String genotyp = genotypy.get(i);
+				Stack<String> obecnyGen = new Stack<String>();
+				for(int j=0; j<genotyp.length(); j++) {
+					
+				}
+			}
+			
+			
+		};
+		Runnable pp2 = () ->{
+			
+		};
+		Runnable pp3 = () ->{
+			
+		};
+		Runnable pp4 = () ->{
+			
+		};
+		
+		pp1.run();
+		pp2.run();
+		pp3.run();
+		pp3.run();
+		pp4.run();
+	}
+	public static void zadanie70() throws Exception {
+		
+	}
+	public static void zadanie81() throws Exception { // Czworok¹ty
+		
+		Scanner plik_dane = new Scanner(new File("Files/81/wspolrzedne.txt"));
+		Scanner plik_daneTR = new Scanner(new File("Files/81/wspolrzedneTR.txt"));
+		
+		ArrayList<ArrayList<Point>> dane_wiersze = new ArrayList<ArrayList<Point>>();		
+		ArrayList<ArrayList<Point>> dane_wierszeTR = new ArrayList<ArrayList<Point>>();		
+		
+		
+		while(plik_dane.hasNext()) {	
+			ArrayList<Point> linia = new ArrayList<Point>();
+			for(int i=0; i<3; i++) {
+				linia.add(new Point(plik_dane.nextInt(), plik_dane.nextInt()));
+			}
+			dane_wiersze.add(linia);
+		}
+		
+		while(plik_daneTR.hasNext()) {
+			ArrayList<Point> linia = new ArrayList<Point>();
+			for(int i=0; i<3; i++) {
+				linia.add(new Point(plik_daneTR.nextInt(), plik_daneTR.nextInt()));
+			}
+			dane_wierszeTR.add(linia);
+		}
+		
+		Runnable pp1 = () -> {
+			int ileWierszy = 0;
+			
+			for(int i=0; i<dane_wiersze.size(); i++) {
+				boolean czyWierszWCwiartce = true;		
+				for(int j=0; j<3; j++) {
+					Point punkt = dane_wiersze.get(i).get(j);
+					if(!(punkt.getX() > 0 && punkt.getY() > 0)) {
+						czyWierszWCwiartce = false;
+					}
+				}
+				if(czyWierszWCwiartce) {
+					ileWierszy++;
+				}
+			}
+			
+			System.out.println("Zadanie 81.1: " + ileWierszy);
+		};
+		Runnable pp2 = () -> {
+			
+			int ileProstych = 0;
+			
+			for(int i=0; i<dane_wiersze.size(); i++) {
+				Point a = dane_wiersze.get(i).get(0);
+				Point b = dane_wiersze.get(i).get(1);
+				Point c = dane_wiersze.get(i).get(2);
+				
+				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
+				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
+				
+				if(tgAB == tgAC) {
+					ileProstych++;
+				}
+			}
+			
+			System.out.println("Zadanie 81.2: " + ileProstych);
+		};
+		Runnable pp3 = () -> {
+			double maxObw = 0d;
+			Point maxA = new Point();
+			Point maxB = new Point();
+			Point maxC = new Point();
+			for(int i=0; i<dane_wierszeTR.size(); i++) {
+				
+				Point a = dane_wierszeTR.get(i).get(0);
+				Point b = dane_wierszeTR.get(i).get(1);
+				Point c = dane_wierszeTR.get(i).get(2);
+				
+				double obw = a.distance(b) + a.distance(c) + b.distance(c);
+				if(obw > maxObw) {
+					maxObw = obw;
+					maxA = a;
+					maxB = b;
+					maxC = c;
+				}
+				//int obwod = Math.hypot(a.get, y) 
+			}
+			
+			Function<Point, String> formatPoint = (Point a) ->{
+				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
+			};
+			
+			new DecimalFormat("#.");
+			Pattern a;
+			System.out.println("Zadanie 81.3: ");
+			System.out.println("Max obwód: " + String.format("%.2f", maxObw));
+			System.out.println("Max obwód: " + new DecimalFormat("#.##").format(maxObw));
+			
+			System.out.println("Trójk¹t: " + formatPoint.apply(maxA) + ", " + formatPoint.apply(maxB) + ", " + formatPoint.apply(maxC));
+		};
+		Runnable pp4 = () -> {
+			int ileProst = 0;
+			
+			for(int i=0; i<dane_wierszeTR.size(); i++) {
+				ArrayList<Point> wiersz = dane_wierszeTR.get(i);
+				//if(wiersz.get(0))
+				double bokA = wiersz.get(0).distance(wiersz.get(1));
+				double bokB = wiersz.get(0).distance(wiersz.get(2));
+				double bokC = wiersz.get(1).distance(wiersz.get(2));
+				
+				
+				boolean czyProst = false;
+				if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				} else if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				} else if(bokA * bokA + bokB * bokB == bokC * bokC) {
+					czyProst = true;
+				}
+				if(czyProst) {
+					ileProst++;
+				}
+				
+			}
+			
+			System.out.println("Zadanie 81.4: " + ileProst);
+		};
+		Runnable pp5 = () -> {
+			
+		};
+		
+		pp1.run();
+		pp2.run();
+		pp3.run();
+		pp4.run();
+		pp5.run();
+	}
+	public static void test() throws Exception {
+		List<String> list = new ArrayList<String>();
+		Collections.addAll(list,"1", "2", "3");
+		
+		List<Point> points = new ArrayList<Point>();
+		
+		points.add(new Point(3,3));
+		points.add(new Point(3,3));
+		points.add(new Point(4,5));
+
+		Point doSkopiowania = new Point(0,0);
+		
+		points.add(doSkopiowania);
+		points.add(doSkopiowania);
+		points.add(doSkopiowania);
+		
+		points = points.stream().distinct().collect(Collectors.toList());
+		
+		System.out.println(points);
+		
+		list = list.stream().map((String el)->{
+			return el + " hello";
+		}).collect(Collectors.toList());
+		
+		
+		// distinct 2: listy z unikatow¹ zawartoœci¹
+		
+		ArrayList<ArrayList<Integer>> listOfLists = new ArrayList<ArrayList<Integer>>();
+		
+		ArrayList<Integer> lista1 = new ArrayList<Integer>();
+		ArrayList<Integer> lista2 = new ArrayList<Integer>();
+		ArrayList<Integer> lista3 = new ArrayList<Integer>();
+		
+		Collections.addAll(lista1, 1,2,3);
+		Collections.addAll(lista2, 1,2,3);
+		Collections.addAll(lista3, 2,3,4);
+		
+		Collections.addAll(listOfLists, lista1, lista2, lista3);
+		
+		List<ArrayList<Integer>> newListOfLists = listOfLists.stream().distinct().collect(Collectors.toList());
+		
+		System.out.println(listOfLists);
+		System.out.println(newListOfLists);
+		
+		Set<Integer> a = new HashSet<Integer>();
+		
+		a.add(1);
+		a.add(1);
+		a.add(2);
+		
+		System.out.println(a);
+		
+//		a.add(new ArrayList<Integer>()){
+//			
+//		}
+		
+	}
+	
+	//a.accept("ddd");
 	
 	public static void main(String[] args) {
 		try {
 //			zadanie58();
 //			zadanie59();
 //			zadanie60();
-			zadanie61();
+//			zadanie61();
+//			zadanie62();
+//			zadanie69();
+//			zadanie70();
+			zadanie81();
+			//test();
+						
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
