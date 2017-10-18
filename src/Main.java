@@ -1,7 +1,16 @@
 import java.awt.Point;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.io.File;
 import java.io.PrintWriter;
+=======
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,11 +28,16 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+=======
+import java.util.Random;
+import java.util.Scanner;
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 import java.util.Random;
 import java.util.Scanner;
@@ -406,13 +420,17 @@ public class Main {
 		ArrayList<String> osemkowe = new ArrayList<String>();
 		ArrayList<Integer> osemkoweInt = new ArrayList<Integer>();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ArrayList<String> dziesietne = new ArrayList<String>();
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		ArrayList<Integer> dziesietneInt = new ArrayList<Integer>();
 		
 		while(plik1.hasNext()) {
 			String next = plik1.next();
+<<<<<<< HEAD
 <<<<<<< HEAD
 			Integer osemkowaInt = 0;
 			for(int i=next.length()-1; i>0; i--) {
@@ -433,6 +451,8 @@ public class Main {
 			int max = osemkoweInt.get(0);
 			int min = osemkoweInt.get(osemkoweInt.size() - 1);
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			osemkoweInt.add(Integer.parseInt(next, 8));
 			osemkowe.add(next);
 		}
@@ -444,12 +464,16 @@ public class Main {
 			Collections.sort(osemkoweInt);
 			String max = Integer.toString(osemkoweInt.get(osemkoweInt.size() - 1), 8);
 			String min = Integer.toString(osemkoweInt.get(0), 8);
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			
 			System.out.println("Min: " + min);
 			System.out.println("Max: " + max);
 		};
 		Runnable pp2 = () -> {
+<<<<<<< HEAD
 <<<<<<< HEAD
 //			int maxDlugoscCiagu = 0;
 //			ArrayList<Integer> najdluzszyCiagMalejacy = new ArrayList<Integer>();
@@ -484,6 +508,8 @@ public class Main {
 				
 			}
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			ArrayList<ArrayList<Integer>> ciagiMalejace = new ArrayList<ArrayList<Integer>>();
 			ArrayList<Integer> aktualnyCiagMalejacy = new ArrayList<Integer>();
 			
@@ -536,6 +562,9 @@ public class Main {
 			}
 			System.out.println("Ilosc 6: " + ileRazy6);
 			System.out.println("Ilosc 6 gdy zapiszemy liczby osemkowo: " + ileRazy6wZapisie8);
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		};
 		
@@ -543,6 +572,7 @@ public class Main {
 		pp2.run();
 		pp3.run();
 		pp4.run();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		consumer.accept("d");
 		runnable.run();
@@ -641,6 +671,8 @@ public class Main {
 		
 		
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		
 	}
 	private static void zadanie63() throws Exception {
@@ -719,6 +751,9 @@ public class Main {
 		ArrayList<ArrayList<Point>> dane_wierszeTR = new ArrayList<ArrayList<Point>>();		
 
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		while(plik_dane.hasNext()) {	
 			ArrayList<Point> linia = new ArrayList<Point>();
@@ -728,7 +763,11 @@ public class Main {
 			dane_wiersze.add(linia);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
@@ -740,15 +779,21 @@ public class Main {
 			dane_wierszeTR.add(linia);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		Runnable pp1 = () -> {
 			int ileWierszy = 0;
 			
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 		Runnable pp1 = () -> {
 			int ileWierszy = 0;
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wiersze.size(); i++) {
 				boolean czyWierszWCwiartce = true;		
@@ -763,6 +808,7 @@ public class Main {
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
 			System.out.println("Zadanie 81.1: " + ileWierszy);
 		};
@@ -771,6 +817,8 @@ public class Main {
 			int ileProstych = 0;
 			
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 			System.out.println("Zadanie 81.1: " + ileWierszy);
 		};
@@ -778,28 +826,41 @@ public class Main {
 
 			int ileProstych = 0;
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wiersze.size(); i++) {
 				Point a = dane_wiersze.get(i).get(0);
 				Point b = dane_wiersze.get(i).get(1);
 				Point c = dane_wiersze.get(i).get(2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
 				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
 				
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
 				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 				if(tgAB == tgAC) {
 					ileProstych++;
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
@@ -812,17 +873,23 @@ public class Main {
 			Point maxC = new Point();
 			for(int i=0; i<dane_wierszeTR.size(); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 				Point a = dane_wierszeTR.get(i).get(0);
 				Point b = dane_wierszeTR.get(i).get(1);
 				Point c = dane_wierszeTR.get(i).get(2);
 				
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 				Point a = dane_wierszeTR.get(i).get(0);
 				Point b = dane_wierszeTR.get(i).get(1);
 				Point c = dane_wierszeTR.get(i).get(2);
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 				double obw = a.distance(b) + a.distance(c) + b.distance(c);
 				if(obw > maxObw) {
@@ -833,6 +900,7 @@ public class Main {
 				}
 				//int obwod = Math.hypot(a.get, y) 
 			}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			
 			Function<Point, String> formatPoint = (Point a) ->{
@@ -851,6 +919,8 @@ public class Main {
 			int ileProst = 0;
 			
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 			Function<Point, String> formatPoint = (Point a) ->{
 				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
@@ -867,6 +937,9 @@ public class Main {
 		Runnable pp4 = () -> {
 			int ileProst = 0;
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wierszeTR.size(); i++) {
 				ArrayList<Point> wiersz = dane_wierszeTR.get(i);
@@ -875,8 +948,13 @@ public class Main {
 				double bokB = wiersz.get(0).distance(wiersz.get(2));
 				double bokC = wiersz.get(1).distance(wiersz.get(2));
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 				
+=======
+
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 
 
@@ -893,6 +971,7 @@ public class Main {
 					ileProst++;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 			}
 			
@@ -903,6 +982,8 @@ public class Main {
 		};
 		
 =======
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 
 			}
 
@@ -912,6 +993,9 @@ public class Main {
 
 		};
 
+<<<<<<< HEAD
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+=======
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		pp1.run();
 		pp2.run();
@@ -919,6 +1003,7 @@ public class Main {
 		pp4.run();
 		pp5.run();
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public static void test() throws Exception {
 		List<String> list = new ArrayList<String>();
@@ -985,6 +1070,12 @@ public class Main {
 	}
 >>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 	
+=======
+	
+	private static void test() throws Exception {
+	}
+	
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 	
 
 	public static void main(String[] args) {
@@ -995,11 +1086,17 @@ public class Main {
 //			zadanie61();
 //			zadanie62();
 <<<<<<< HEAD
+<<<<<<< HEAD
 //			zadanie69();
 //			zadanie70();
 			zadanie81();
 			//test();
 						
+=======
+//			zadanie63();
+//			zadanie64();
+			test();
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 =======
 //			zadanie63();
 //			zadanie64();
