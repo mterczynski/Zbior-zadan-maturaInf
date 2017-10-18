@@ -1,5 +1,0 @@
-Podpunkt 1:
-Ilo�� ci�g�w arytmetycznych: 44
-Maksymalna r�nica ci�gu arytmetycznego: 246849
-
-Podpunkt 2:

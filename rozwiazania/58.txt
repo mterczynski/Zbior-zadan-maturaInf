@@ -1,9 +1,0 @@
-Zadanie 58.1:
-
-Najni�sza odnotowana temperatura w stacji 1: -11
-Najni�sza odnotowana temperatura w stacji 2: -85
-Najni�sza odnotowana temperatura w stacji 3: 0
-
-Zadanie 58.2:
-
-Liczba b��dnych pomiar�w: 937

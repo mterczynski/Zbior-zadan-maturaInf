@@ -2,22 +2,23 @@ import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class Main {
 
@@ -322,13 +323,12 @@ public class Main {
 		pp2.run();
 		pp3.run();
 	}
-	private static void zadanie61() throws Exception{
-		PrintWriter printWriter = new PrintWriter(new File("rozwiazania/61.txt"));
-		
+	private static void zadanie61() throws Exception{	
 		Scanner plikCiagi = new Scanner(new File("Files/61/ciagi.txt"));
 		Scanner plikBledne = new Scanner(new File("Files/61/bledne.txt"));
 		
 		ArrayList<ArrayList<Integer>> ciagi = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> bledne = new ArrayList<ArrayList<Integer>>();
 		
 		while(plikCiagi.hasNext()) {
 			int dlugoscCiagu = plikCiagi.nextInt();
@@ -339,6 +339,17 @@ public class Main {
 			}
 			ciagi.add(aktualnyCiag);
 		}
+		
+		while(plikBledne.hasNext()) {
+			int dlugoscCiagu = plikBledne.nextInt();
+			ArrayList<Integer> aktualnyCiag = new ArrayList<Integer>();
+			
+			for(int i=0; i<dlugoscCiagu; i++) {
+				aktualnyCiag.add(plikBledne.nextInt());
+			}
+			bledne.add(aktualnyCiag);
+		}
+		
 		Runnable pp1 = () ->{
 			ArrayList<ArrayList<Integer>> ciagiArytmetyczne = new ArrayList<ArrayList<Integer>>();
 			
@@ -366,20 +377,41 @@ public class Main {
 				}
 			}
 			
-			printWriter.println("Podpunkt 1:");
-			printWriter.println("Ilo�� ci�g�w arytmetycznych: " + ciagiArytmetyczne.size());
-			printWriter.println("Maksymalna r�nica ci�gu arytmetycznego: " + maxRoznica);
-			printWriter.flush();
+			System.out.println("61.1:");
+			System.out.println("Ilość ciągów arytmetycznych: " + ciagiArytmetyczne.size());
+			System.out.println("Maksymalna różnica ciągu arytmetycznego: " + maxRoznica);
 		};
 		Runnable pp2 = () ->{
-			printWriter.println();
-			printWriter.println("Podpunkt 2:");
+			System.out.println("61.2: ");
+			
 			for(int i=0; i<ciagi.size(); i++) {
-			}
-			printWriter.flush();
+				int max = -1;  // -1 oznacza brak pełnego sześcianu liczby naturalnej w ciągu
+				for(int j=0; j<ciagi.get(i).size(); j++) {
+					int liczba = ciagi.get(i).get(j);
+					if(Math.pow((int)Math.cbrt(liczba),3) == liczba && liczba > max) {
+						max = liczba;
+					}
+				}
+				if(max >= 0) {
+					System.out.println(max);
+				}
+			}	
 		};
 		Runnable pp3 = () ->{
-			
+			System.out.println("61.3: ");
+			for(int i=0; i<bledne.size(); i++) {
+				ArrayList<Integer> roznice = new ArrayList<Integer>();
+				for(int j=i+1; j<bledne.get(i).size(); j++) {
+					int roznica = bledne.get(i).get(j) - bledne.get(i).get(j-1);
+					roznice.add(roznica);
+				}
+				for(int j=0; j<roznice.size(); j++) {
+					if(Collections.frequency(roznice, roznice.get(j)) == 1) {
+						System.out.println(j);
+						//System.out.println("i= " + i + ", j = " + j + ", " + roznice.get(j) + "");
+					}
+				}
+			}
 		};
 		
 		pp1.run();
@@ -679,10 +711,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			zadanie58();
+//			zadanie58();
 //			zadanie59();
 //			zadanie60();
-//			zadanie61();
+			zadanie61();
 //			zadanie62();
 //			zadanie63();
 //			zadanie64();
