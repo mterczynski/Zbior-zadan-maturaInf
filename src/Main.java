@@ -1,18 +1,33 @@
 import java.awt.Point;
+<<<<<<< HEAD
 import java.io.File;
 import java.io.PrintWriter;
+=======
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+=======
+import java.util.Random;
+import java.util.Scanner;
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,187 +40,109 @@ public class Main {
 		Scanner plik_dane2 = new Scanner(new File("Files/58/dane_systemy2.txt"));
 		Scanner plik_dane3 = new Scanner(new File("Files/58/dane_systemy3.txt"));
 		
-		PrintWriter printWriter = new PrintWriter(new File("rozwiazania/58.txt"));
+		ArrayList<Integer> temperatury1 = new ArrayList<Integer>();
+		ArrayList<Integer> temperatury2 = new ArrayList<Integer>();
+		ArrayList<Integer> temperatury3 = new ArrayList<Integer>();
 		
-		class Pomiar{
-			public int temperatura;
-			public int czas;
-		}
-		
-		ArrayList<Pomiar> pomiary1 = new ArrayList<Pomiar>();
-		ArrayList<Pomiar> pomiary2 = new ArrayList<Pomiar>();
-		ArrayList<Pomiar> pomiary3 = new ArrayList<Pomiar>();
+		ArrayList<Integer> czasy1 = new ArrayList<Integer>();
+		ArrayList<Integer> czasy2 = new ArrayList<Integer>();
+		ArrayList<Integer> czasy3 = new ArrayList<Integer>();
 		
 		while(plik_dane1.hasNext()) {
-			String czas = plik_dane1.next();
-			String temperatura = plik_dane1.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				if(czas.charAt(czas.length()-1-i) == '1') {
-					czasInt += (int)Math.pow(2, i);
-				}
-			}
-			
-			
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				if(temperatura.charAt(temperatura.length()-1-i) == '1') {
-					temperaturaInt += (int)Math.pow(2, i);
-				}
-			}
-			if(temperatura.charAt(0) == '1'){
-				temperaturaInt += (int)Math.pow(2, temperatura.length()-1);
-			} else if(temperatura.charAt(0) == '-'){
-				temperaturaInt *= -1;
-			}
-			
-			
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary1.add(pomiar);
+			int czas = Integer.parseInt(plik_dane1.next(), 2);
+			int temperatura = Integer.parseInt(plik_dane1.next(), 2);
+			temperatury1.add(temperatura);
+			czasy1.add(czas);
 		}
-		
 		while(plik_dane2.hasNext()) {
-			String czas = plik_dane2.next();
-			String temperatura = plik_dane2.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				czasInt += (int)Math.pow(4, i) * Character.getNumericValue(czas.charAt(czas.length()-1-i));
-			}
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				temperaturaInt += (int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i);
-				if((int)Math.pow(4, i) * Character.getNumericValue(temperatura.length()-1-i) < 0) {
-					System.out.print("Tu jest b³¹d");
-				}
-			}
-			if(temperatura.charAt(0) != '-'){
-				//System.out.print("Nie ma minusa; ");
-				temperaturaInt += (int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0));
-				if((int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0)) < 0) {
-					System.out.print("Tu jest b³¹d");
-				}
-			} else {
-				//System.out.print("Jest minus; ");
-				//System.out.print(temperaturaInt + ";;;");
-				//temperaturaInt *= -1;
-				//System.out.print(temperaturaInt);
-			}
-			
-			//System.out.println("temperaturaInt: " + temperaturaInt  + ", temperaturaStr: " + temperatura  + ", char at 0: " + temperatura.charAt(0));
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary2.add(pomiar);
+			int czas = Integer.parseInt(plik_dane2.next(), 4);
+			int temperatura = Integer.parseInt(plik_dane2.next(), 4);
+			temperatury2.add(temperatura);
+			czasy2.add(czas);
 		}
-		
 		while(plik_dane3.hasNext()) {
-			String czas = plik_dane3.next();
-			String temperatura = plik_dane3.next();
-			
-			Integer czasInt = 0;
-			Integer temperaturaInt = 0;
-			// zamiana czasu na int:
-			for(int i=0; i<czas.length(); i++) {
-				czasInt += (int)Math.pow(8, i) * Character.getNumericValue(czas.charAt(czas.length()-1-i));
-			}
-			// zamiana temperatury na int:
-			for(int i=0; i<temperatura.length()-1; i++) {
-				temperaturaInt += (int)Math.pow(8, i) * Character.getNumericValue(temperatura.length()-1-i);
-			}
-			if(temperatura.charAt(0) != '-'){
-				temperaturaInt += (int)Math.pow(4, temperatura.length()-1) * Character.getNumericValue(temperatura.charAt(0));
-			} else {
-				temperaturaInt *= -1;
-			}
-			
-			Pomiar pomiar = new Pomiar();
-			pomiar.temperatura = temperaturaInt;
-			pomiar.czas = czasInt;
-			
-			pomiary3.add(pomiar);
+			int czas = Integer.parseInt(plik_dane3.next(), 8);
+			int temperatura = Integer.parseInt(plik_dane3.next(), 8);
+			temperatury3.add(temperatura);
+			czasy3.add(czas);
 		}
 		
-		Runnable pp1 = () ->{
-			int min1 = 999;
-			int min2 = 999;
-			int min3= 999;
+		double d = 1d/60d;
+		int a = (int) (300 * d);
+		int b = (int) (-300 * d);
+		
+		
+		System.out.println(d);
+		System.out.println(a);
+		System.out.println(b);
+		
+		Runnable pp1 = () -> {
+			ArrayList<Integer> temperatury1Cp = new ArrayList<Integer>(temperatury1);
+			ArrayList<Integer> temperatury2Cp = new ArrayList<Integer>(temperatury2);
+			ArrayList<Integer> temperatury3Cp = new ArrayList<Integer>(temperatury3);
 			
-			for(Pomiar pomiar : pomiary1) {
-				//System.out.println(pomiar.temperatura );
-				if(pomiar.temperatura < min1) {
-					min1 = pomiar.temperatura;
+			Collections.sort(temperatury1Cp);
+			Collections.sort(temperatury2Cp);
+			Collections.sort(temperatury3Cp);
+			
+			System.out.println("NajniÅ¼szy wynik stacji 1: " + Integer.toString(temperatury1Cp.get(0), 2));
+			System.out.println("NajniÅ¼szy wynik stacji 2: " + Integer.toString(temperatury2Cp.get(0), 2));
+			System.out.println("NajniÅ¼szy wynik stacji 3: " + Integer.toString(temperatury3Cp.get(0), 2));
+		};
+		Runnable pp2 = () -> {
+			int ileBlednychWeWszystkich3 = 0;
+			for(int i=0; i<czasy1.size(); i++) {
+				if(czasy1.get(i) % 12 !=0 && czasy2.get(i) % 12 !=0 && czasy3.get(i) % 12 !=0) {
+					ileBlednychWeWszystkich3++;
 				}
 			}
-			for(Pomiar pomiar2 : pomiary2) {
-				if(pomiar2.temperatura < min2) {
-					min2 = pomiar2.temperatura;
-				}			
+			System.out.println("IloÅ›Ä‡ bÅ‚Ä™dnych pomiarÃ³w we wszystkich 3 stacjach w tym samym czasie: " + ileBlednychWeWszystkich3);
+		};
+		Runnable pp3 = () -> {
+			int rekord1 = -1000;
+			int rekord2 = -1000;
+			int rekord3 = -1000;
+			int ileDniRekordowych = 0;
+			for(int i=0; i<temperatury1.size(); i++) {
+				if(temperatury1.get(i) > rekord1 || temperatury2.get(i) > rekord2 || temperatury3.get(i) > rekord3) {
+					ileDniRekordowych++;
+				}
+				if(temperatury1.get(i) > rekord1) {
+					rekord1 = temperatury1.get(i);
+				}
+				if(temperatury2.get(i) > rekord2) {
+					rekord2 = temperatury2.get(i);
+				}
+				if(temperatury3.get(i) > rekord3) {
+					rekord3 = temperatury3.get(i);
+				}
 			}
-			for(Pomiar pomiar3 : pomiary3) {
-				if(pomiar3.temperatura < min3) {
-					min3 = pomiar3.temperatura;
+			System.out.println("IloÅ›Ä‡ dni rekordowych: " + ileDniRekordowych);
+		};
+		Runnable pp4 = () -> {
+			int maxSkok = 0;	
+			
+			for(int i=0; i<temperatury1.size(); i++) {
+				for(int j=i+1; j<temperatury1.size(); j++) {
+					int kwadrat = (int)Math.pow(temperatury1.get(i) - temperatury1.get(j), 2);
+					int roznica = j - i;
+					double skokNiezaokroglony = (double)kwadrat / (double)roznica;
+					int skok = (int) Math.ceil(skokNiezaokroglony);
+					//System.out.println(skok);
+					if(skok > maxSkok) {
+						maxSkok = skok;
+					}
 				}
 			}
 			
-			//System.out.println(pomiary1);
-			//System.out.println(pomiary2);
-			//System.out.println(pomiary3);
-			
-			String min1Binarnie = Integer.toBinaryString(Math.abs(min1));
-			String min2Binarnie = Integer.toBinaryString(Math.abs(min2));
-			String min3Binarnie = Integer.toBinaryString(Math.abs(min3));
-			
-			if(min1<0) {
-				min1Binarnie = "-" + min1Binarnie;
-			}
-			if(min2<0) {
-				min2Binarnie = "-" + min2Binarnie;	
-			}
-			if(min3<0) {
-				min3Binarnie = "-" + min3Binarnie;
-			}
-			
-			printWriter.println("Zadanie 58.1:");
-			printWriter.println();
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 1: " + min1);
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 2: " + min2);
-			printWriter.println("Najni¿sza odnotowana temperatura w stacji 3: " + min3);
-			printWriter.flush();
-		};
-		Runnable pp2 = () ->{
-			int ileBlednychPomiarow = 0;
-			for(int i=0; i<pomiary1.size(); i++) {
-				if(pomiary1.get(i).czas != pomiary2.get(i).czas || pomiary1.get(i).czas != pomiary3.get(i).czas) {
-					ileBlednychPomiarow++;
-				}
-			}
-			printWriter.println();
-			printWriter.println("Zadanie 58.2:");
-			printWriter.println();
-			printWriter.println("Liczba b³êdnych pomiarów: " + ileBlednychPomiarow);
-			printWriter.flush();
-		};
-		Runnable pp3 = () ->{
-		};
-		Runnable pp4 = () ->{
+			System.out.println("Zadanie 58.4: Max. skok temperatury to " + maxSkok);
 		};
 		
 		pp1.run();
 		pp2.run();
 		pp3.run();
 		pp4.run();
+		
 	}
 	private static void zadanie59() throws Exception {
 		
@@ -254,7 +191,7 @@ public class Main {
 				}
 			}
 			printWriter.println("podpunkt 1:");
-			printWriter.println("Iloœæ liczb maj¹cych dok³adnie 3 ró¿ne nieparzyste czynniki pierwsze: " + ileLiczbSpelniajacychWarunki);
+			printWriter.println("Iloï¿½ï¿½ liczb majï¿½cych dokï¿½adnie 3 rï¿½ne nieparzyste czynniki pierwsze: " + ileLiczbSpelniajacychWarunki);
 			printWriter.flush();
 		};
 		Runnable pp2 = () -> {
@@ -269,7 +206,7 @@ public class Main {
 			}
 			printWriter.println();
 			printWriter.println("podpunkt 2:");
-			printWriter.println("Iloœæ palindromów: " + ilePalindromow);
+			printWriter.println("Iloï¿½ï¿½ palindromï¿½w: " + ilePalindromow);
 			printWriter.flush();
 		};
 		Runnable pp3 = () ->{
@@ -300,7 +237,7 @@ public class Main {
 			printWriter.println();
 			printWriter.println("podpunkt 3:");
 			for(int i=1; i<=8; i++) {
-				printWriter.println("Iloœæ liczb o mocy: " + i +  " wynosi " + moc_liczby.get(i).size());
+				printWriter.println("Iloï¿½ï¿½ liczb o mocy: " + i +  " wynosi " + moc_liczby.get(i).size());
 			}
 			printWriter.println("Minimalna liczba o mocy 1: " + Collections.min(moc_liczby.get(1)));
 			printWriter.print("Maksymalna liczba o mocy 1: " + Collections.max(moc_liczby.get(1)));
@@ -334,7 +271,7 @@ public class Main {
 				}
 			}
 			printWriter.println("Podpunkt 1: ");
-			printWriter.println("Iloœæ liczb mniejszych od 1000: " + ileMniejszychOd1000);
+			printWriter.println("Iloï¿½ï¿½ liczb mniejszych od 1000: " + ileMniejszychOd1000);
 			printWriter.println("Dwie ostatnie liczby: " + przedostatnia + ", " + ostatnia);
 			printWriter.flush();
 			
@@ -387,7 +324,7 @@ public class Main {
 				if(czyJestWzgledniePierwsza) {
 					printWriter.println();
 					printWriter.println("Podpunkt 3: ");
-					printWriter.print("Najwiêksza wzglêdnie pierwsza liczba to: " + liczba);
+					printWriter.print("Najwiï¿½ksza wzglï¿½dnie pierwsza liczba to: " + liczba);
 					printWriter.flush();
 					break;
 				}	
@@ -443,8 +380,8 @@ public class Main {
 			}
 			
 			printWriter.println("Podpunkt 1:");
-			printWriter.println("Iloœæ ci¹gów arytmetycznych: " + ciagiArytmetyczne.size());
-			printWriter.println("Maksymalna ró¿nica ci¹gu arytmetycznego: " + maxRoznica);
+			printWriter.println("Iloï¿½ï¿½ ciï¿½gï¿½w arytmetycznych: " + ciagiArytmetyczne.size());
+			printWriter.println("Maksymalna rï¿½nica ciï¿½gu arytmetycznego: " + maxRoznica);
 			printWriter.flush();
 		};
 		Runnable pp2 = () ->{
@@ -468,11 +405,15 @@ public class Main {
 		
 		ArrayList<String> osemkowe = new ArrayList<String>();
 		ArrayList<Integer> osemkoweInt = new ArrayList<Integer>();
+<<<<<<< HEAD
 		ArrayList<String> dziesietne = new ArrayList<String>();
+=======
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		ArrayList<Integer> dziesietneInt = new ArrayList<Integer>();
 		
 		while(plik1.hasNext()) {
 			String next = plik1.next();
+<<<<<<< HEAD
 			Integer osemkowaInt = 0;
 			for(int i=next.length()-1; i>0; i--) {
 				osemkowaInt += (int)(Math.pow(8, i)) * Integer.parseInt(next.charAt(i) + "");
@@ -491,11 +432,25 @@ public class Main {
 			Collections.sort(osemkowe);
 			int max = osemkoweInt.get(0);
 			int min = osemkoweInt.get(osemkoweInt.size() - 1);
+=======
+			osemkoweInt.add(Integer.parseInt(next, 8));
+			osemkowe.add(next);
+		}
+		while(plik2.hasNext()) {
+			dziesietneInt.add(Integer.parseInt(plik2.next()));
+		}
+		 
+		Runnable pp1 = () -> {
+			Collections.sort(osemkoweInt);
+			String max = Integer.toString(osemkoweInt.get(osemkoweInt.size() - 1), 8);
+			String min = Integer.toString(osemkoweInt.get(0), 8);
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			
 			System.out.println("Min: " + min);
 			System.out.println("Max: " + max);
 		};
 		Runnable pp2 = () -> {
+<<<<<<< HEAD
 //			int maxDlugoscCiagu = 0;
 //			ArrayList<Integer> najdluzszyCiagMalejacy = new ArrayList<Integer>();
 //			ArrayList<Integer> ciagMalejacy = new ArrayList<Integer>();
@@ -528,12 +483,67 @@ public class Main {
 				int liczba8 = 0;
 				
 			}
+=======
+			ArrayList<ArrayList<Integer>> ciagiMalejace = new ArrayList<ArrayList<Integer>>();
+			ArrayList<Integer> aktualnyCiagMalejacy = new ArrayList<Integer>();
+			
+			aktualnyCiagMalejacy.add(dziesietneInt.get(0));
+			
+			for(int i=1; i<dziesietneInt.size(); i++) {
+				int liczba = dziesietneInt.get(i);
+				if(aktualnyCiagMalejacy.size() == 0 || liczba >= aktualnyCiagMalejacy.get(aktualnyCiagMalejacy.size()-1)) {
+					aktualnyCiagMalejacy.add(liczba);
+				} else { // koniec ciagu
+					ciagiMalejace.add(aktualnyCiagMalejacy);
+					aktualnyCiagMalejacy = new ArrayList<Integer>(); 
+					aktualnyCiagMalejacy.add(liczba);
+				}
+			}
+			// znalezienie najdluzszego ciagu:
+			ArrayList<Integer> najdluzszyCiagMalejacy = ciagiMalejace.get(0);
+			for(int i=0; i<ciagiMalejace.size(); i++) {
+				if(ciagiMalejace.get(i).size() > najdluzszyCiagMalejacy.size()) {
+					najdluzszyCiagMalejacy = ciagiMalejace.get(i);
+				}
+			}
+			
+			System.out.println(najdluzszyCiagMalejacy);
+		};
+		Runnable pp3 = () -> {
+			ArrayList<Integer> wierszeWKtorychLiczbySaTakieSame = new ArrayList<Integer>();
+			ArrayList<Integer> wierszeWKtorychLiczba1JestWieksza = new ArrayList<Integer>();
+			
+			for(int i=0; i<dziesietneInt.size(); i++) {
+				int osemkowaInt = Integer.parseInt(osemkowe.get(i), 8);
+				int dziesietnaInt = dziesietneInt.get(i);
+				if(osemkowaInt == dziesietnaInt) {
+					wierszeWKtorychLiczbySaTakieSame.add(i + 1);
+				} else if(dziesietnaInt > osemkowaInt) {
+					wierszeWKtorychLiczba1JestWieksza.add(i + 1);
+				}
+			}
+			System.out.println("Ilosc wierszy w ktorych liczby sa takie same: " + wierszeWKtorychLiczbySaTakieSame.size());
+			System.out.println("Ilosc wierszy w ktorych liczba1 jest wiÄ™ksza: " + wierszeWKtorychLiczba1JestWieksza.size());
+		};
+		Runnable pp4 = () -> {
+			int ileRazy6 = 0;
+			int ileRazy6wZapisie8 = 0;
+			for(int i=0; i<1000; i++) {
+				String liczba = dziesietneInt.get(i) + "";
+				ileRazy6 += liczba.length() - liczba.replaceAll("6", "").length();
+				String liczba8 = Integer.toString(dziesietneInt.get(i), 8);
+				ileRazy6wZapisie8 += liczba8.length() - liczba8.replaceAll("6", "").length();
+			}
+			System.out.println("Ilosc 6: " + ileRazy6);
+			System.out.println("Ilosc 6 gdy zapiszemy liczby osemkowo: " + ileRazy6wZapisie8);
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		};
 		
 		pp1.run();
 		pp2.run();
 		pp3.run();
 		pp4.run();
+<<<<<<< HEAD
 		consumer.accept("d");
 		runnable.run();
 		Swimmable<String> swimService = (String a) -> {
@@ -630,6 +640,86 @@ public class Main {
 		ArrayList<ArrayList<Point>> dane_wierszeTR = new ArrayList<ArrayList<Point>>();		
 		
 		
+=======
+		
+	}
+	private static void zadanie63() throws Exception {
+		Scanner plikCiagi = new Scanner(new File("Files/63/ciagi.txt"));
+		ArrayList<String> ciagi = new ArrayList<String>();		
+		
+		while(plikCiagi.hasNext()) {
+			ciagi.add(plikCiagi.next());
+		}
+		
+		Runnable pp1 = () -> {
+			ArrayList<String> ciagiDwucykliczne = new ArrayList<String>();	
+			for(String ciag: ciagi) {
+				if(ciag.length() % 2 == 0) {
+					if(ciag.substring(0, ciag.length()/2).equals(ciag.substring(ciag.length()/2, ciag.length()))) {
+						ciagiDwucykliczne.add(ciag);
+					}
+				}
+			}
+			System.out.println(ciagiDwucykliczne);
+		};
+		Runnable pp2 = () -> {
+			int ileBezDwochJedynekObokSiebie = 0;
+			for(String ciag: ciagi) {
+				boolean czySpelniaWarunek = true;
+				for(int i=0; i<ciag.length()-1; i++) {
+					if(ciag.charAt(i) == '1' && ciag.charAt(i+1) == '1') {
+						czySpelniaWarunek = false;
+					}
+				}
+				if(czySpelniaWarunek) {
+					ileBezDwochJedynekObokSiebie++;
+				}
+			}
+			System.out.println(ileBezDwochJedynekObokSiebie);
+		};
+		Runnable pp3 = () -> {
+			
+		};
+		pp1.run();
+		pp2.run();
+		pp3.run();
+	}
+	private static void zadanie64() throws Exception {
+		BufferedReader plik_obrazki = Files.newBufferedReader(Paths.get("Files/64/dane_obrazki.txt"));
+		ArrayList<ArrayList<Integer>> obrazki = new ArrayList<ArrayList<Integer>>();
+		
+		List<String> lines = plik_obrazki.lines().collect(Collectors.toList());
+//		while(plik_obrazki.hasNext()) {
+//			ArrayList<Integer> obrazek = new ArrayList<Integer>();
+////			for(int i=0; i<36; i++) {
+////				obrazek.add(plik_obrazki.nextInt());
+////			}
+//		}
+		
+		Runnable pp1 = () -> {
+			
+		};
+		Runnable pp2 = () -> {
+			
+		};
+		Runnable pp3 = () -> {
+			
+		};
+		pp1.run();
+		pp2.run();
+		pp3.run();
+	}
+
+	public static void zadanie81() throws Exception { // CzworokÄ…ty
+
+		Scanner plik_dane = new Scanner(new File("Files/81/wspolrzedne.txt"));
+		Scanner plik_daneTR = new Scanner(new File("Files/81/wspolrzedneTR.txt"));
+
+		ArrayList<ArrayList<Point>> dane_wiersze = new ArrayList<ArrayList<Point>>();		
+		ArrayList<ArrayList<Point>> dane_wierszeTR = new ArrayList<ArrayList<Point>>();		
+
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		while(plik_dane.hasNext()) {	
 			ArrayList<Point> linia = new ArrayList<Point>();
 			for(int i=0; i<3; i++) {
@@ -637,7 +727,11 @@ public class Main {
 			}
 			dane_wiersze.add(linia);
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		while(plik_daneTR.hasNext()) {
 			ArrayList<Point> linia = new ArrayList<Point>();
 			for(int i=0; i<3; i++) {
@@ -645,10 +739,17 @@ public class Main {
 			}
 			dane_wierszeTR.add(linia);
 		}
+<<<<<<< HEAD
 		
 		Runnable pp1 = () -> {
 			int ileWierszy = 0;
 			
+=======
+
+		Runnable pp1 = () -> {
+			int ileWierszy = 0;
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wiersze.size(); i++) {
 				boolean czyWierszWCwiartce = true;		
 				for(int j=0; j<3; j++) {
@@ -661,6 +762,7 @@ public class Main {
 					ileWierszy++;
 				}
 			}
+<<<<<<< HEAD
 			
 			System.out.println("Zadanie 81.1: " + ileWierszy);
 		};
@@ -668,19 +770,39 @@ public class Main {
 			
 			int ileProstych = 0;
 			
+=======
+
+			System.out.println("Zadanie 81.1: " + ileWierszy);
+		};
+		Runnable pp2 = () -> {
+
+			int ileProstych = 0;
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wiersze.size(); i++) {
 				Point a = dane_wiersze.get(i).get(0);
 				Point b = dane_wiersze.get(i).get(1);
 				Point c = dane_wiersze.get(i).get(2);
+<<<<<<< HEAD
 				
 				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
 				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
 				
+=======
+
+				double tgAB = Math.abs((a.getY() - b.getY()) / (a.getX() - b.getX()));
+				double tgAC = Math.abs((a.getY() - c.getY()) / (a.getX() - c.getX()));
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 				if(tgAB == tgAC) {
 					ileProstych++;
 				}
 			}
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			System.out.println("Zadanie 81.2: " + ileProstych);
 		};
 		Runnable pp3 = () -> {
@@ -689,11 +811,19 @@ public class Main {
 			Point maxB = new Point();
 			Point maxC = new Point();
 			for(int i=0; i<dane_wierszeTR.size(); i++) {
+<<<<<<< HEAD
 				
 				Point a = dane_wierszeTR.get(i).get(0);
 				Point b = dane_wierszeTR.get(i).get(1);
 				Point c = dane_wierszeTR.get(i).get(2);
 				
+=======
+
+				Point a = dane_wierszeTR.get(i).get(0);
+				Point b = dane_wierszeTR.get(i).get(1);
+				Point c = dane_wierszeTR.get(i).get(2);
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 				double obw = a.distance(b) + a.distance(c) + b.distance(c);
 				if(obw > maxObw) {
 					maxObw = obw;
@@ -703,6 +833,7 @@ public class Main {
 				}
 				//int obwod = Math.hypot(a.get, y) 
 			}
+<<<<<<< HEAD
 			
 			Function<Point, String> formatPoint = (Point a) ->{
 				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
@@ -719,14 +850,37 @@ public class Main {
 		Runnable pp4 = () -> {
 			int ileProst = 0;
 			
+=======
+
+			Function<Point, String> formatPoint = (Point a) ->{
+				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
+			};
+
+			new DecimalFormat("#.");
+			Pattern a;
+			System.out.println("Zadanie 81.3: ");
+			System.out.println("Max obwÃ³d: " + String.format("%.2f", maxObw));
+			System.out.println("Max obwÃ³d: " + new DecimalFormat("#.##").format(maxObw));
+
+			System.out.println("TrÃ³jkÄ…t: " + formatPoint.apply(maxA) + ", " + formatPoint.apply(maxB) + ", " + formatPoint.apply(maxC));
+		};
+		Runnable pp4 = () -> {
+			int ileProst = 0;
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 			for(int i=0; i<dane_wierszeTR.size(); i++) {
 				ArrayList<Point> wiersz = dane_wierszeTR.get(i);
 				//if(wiersz.get(0))
 				double bokA = wiersz.get(0).distance(wiersz.get(1));
 				double bokB = wiersz.get(0).distance(wiersz.get(2));
 				double bokC = wiersz.get(1).distance(wiersz.get(2));
+<<<<<<< HEAD
 				
 				
+=======
+
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 				boolean czyProst = false;
 				if(bokA * bokA + bokB * bokB == bokC * bokC) {
 					czyProst = true;
@@ -738,6 +892,7 @@ public class Main {
 				if(czyProst) {
 					ileProst++;
 				}
+<<<<<<< HEAD
 				
 			}
 			
@@ -747,12 +902,24 @@ public class Main {
 			
 		};
 		
+=======
+
+			}
+
+			System.out.println("Zadanie 81.4: " + ileProst);
+		};
+		Runnable pp5 = () -> {
+
+		};
+
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		pp1.run();
 		pp2.run();
 		pp3.run();
 		pp4.run();
 		pp5.run();
 	}
+<<<<<<< HEAD
 	public static void test() throws Exception {
 		List<String> list = new ArrayList<String>();
 		Collections.addAll(list,"1", "2", "3");
@@ -812,19 +979,32 @@ public class Main {
 	}
 	
 	//a.accept("ddd");
+=======
 	
+	private static void test() throws Exception {
+	}
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
+	
+	
+
 	public static void main(String[] args) {
 		try {
-//			zadanie58();
+			zadanie58();
 //			zadanie59();
 //			zadanie60();
 //			zadanie61();
 //			zadanie62();
+<<<<<<< HEAD
 //			zadanie69();
 //			zadanie70();
 			zadanie81();
 			//test();
 						
+=======
+//			zadanie63();
+//			zadanie64();
+			test();
+>>>>>>> 796735776b7b0b5938bc970d14f609453df925ba
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
