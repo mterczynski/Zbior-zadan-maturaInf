@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -323,12 +324,11 @@ public class Main {
 		pp3.run();
 	}
 	private static void zadanie61() throws Exception{
-		PrintWriter printWriter = new PrintWriter(new File("rozwiazania/61.txt"));
-		
 		Scanner plikCiagi = new Scanner(new File("Files/61/ciagi.txt"));
 		Scanner plikBledne = new Scanner(new File("Files/61/bledne.txt"));
 		
 		ArrayList<ArrayList<Integer>> ciagi = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> bledneCiagi = new ArrayList<ArrayList<Integer>>();
 		
 		while(plikCiagi.hasNext()) {
 			int dlugoscCiagu = plikCiagi.nextInt();
@@ -339,6 +339,16 @@ public class Main {
 			}
 			ciagi.add(aktualnyCiag);
 		}
+		while(plikBledne.hasNext()) {
+			int dlugoscCiagu = plikBledne.nextInt();
+			ArrayList<Integer> aktualnyCiag = new ArrayList<Integer>();
+			
+			for(int i=0; i<dlugoscCiagu; i++) {
+				aktualnyCiag.add(plikBledne.nextInt());
+			}
+			bledneCiagi.add(aktualnyCiag);
+		}
+		
 		Runnable pp1 = () ->{
 			ArrayList<ArrayList<Integer>> ciagiArytmetyczne = new ArrayList<ArrayList<Integer>>();
 			
@@ -366,20 +376,77 @@ public class Main {
 				}
 			}
 			
-			printWriter.println("Podpunkt 1:");
-			printWriter.println("Ilo�� ci�g�w arytmetycznych: " + ciagiArytmetyczne.size());
-			printWriter.println("Maksymalna r�nica ci�gu arytmetycznego: " + maxRoznica);
-			printWriter.flush();
+			System.out.println("61.1:");
+			System.out.println("Ilosc ciagow arytmetycznych: " + ciagiArytmetyczne.size());
+			System.out.println("Maksymalna roznica ciagu arytmetycznego: " + maxRoznica);
+			System.out.flush();
 		};
 		Runnable pp2 = () ->{
-			printWriter.println();
-			printWriter.println("Podpunkt 2:");
-			for(int i=0; i<ciagi.size(); i++) {
+			System.out.println();
+			System.out.println("61.2:");
+			
+			for(ArrayList<Integer> ciag : ciagi) {
+				int maxCube = -1; // -1 oznacza brak szescianu liczby naturalnej w ciagu
+				for(int liczba : ciag) {
+					int cbrtAndBack = (int)Math.pow(((int)Math.cbrt(liczba)), 3);
+					if(cbrtAndBack == liczba) {
+						maxCube = liczba;
+					};
+				}
+				if(maxCube >= 0) {
+					System.out.println(maxCube);
+				}
 			}
-			printWriter.flush();
 		};
 		Runnable pp3 = () ->{
-			
+			System.out.println("61.3: ");
+			for(int i=0; i<bledneCiagi.size(); i++) {
+				ArrayList<Integer> ciag = bledneCiagi.get(i);
+				ArrayList<Integer> roznice = new ArrayList<Integer>();
+				for(int j=1; j<ciag.size(); j++) {
+					int roznica = ciag.get(j) - ciag.get(j-1);
+					roznice.add(roznica);
+				}
+				HashMap<Integer, Integer> roznica_count = new HashMap<Integer, Integer>();
+				for(int roznica : roznice) {
+					if(roznica_count.get(roznica) == null) {
+						roznica_count.put(roznica, 1);
+					} else {
+						roznica_count.put(roznica, roznica_count.get(roznica)+1);
+					}
+				}
+				
+				Integer blednaRoznica1 = null; 
+				Integer blednaRoznica2 = null;
+				
+				for(Map.Entry<Integer, Integer>  entry: roznica_count.entrySet()) {
+					int count = entry.getValue();
+					if(count == 1) {
+						if(blednaRoznica1 == null) {
+							blednaRoznica1 = entry.getKey();
+						} else {
+							blednaRoznica2 = entry.getKey();
+						}
+					} 
+				}
+				
+				int indexBlednej1 = roznice.indexOf(blednaRoznica1);
+				
+				if(blednaRoznica2 == null) { // => bledny wyraz znajduje sie na poczatku lub koncu ciagu
+					if(indexBlednej1 == 0) {
+						System.out.println(ciag.get(0));
+					} else {
+						System.out.println(ciag.get(ciag.size()-1));
+					}
+				} else {
+					int indexBlednej2 = roznice.indexOf(blednaRoznica2);
+					if(indexBlednej2 > indexBlednej1) {
+						System.out.println(ciag.get(indexBlednej2));
+					} else {
+						System.out.println(ciag.get(indexBlednej1));
+					}
+				}				
+			}
 		};
 		
 		pp1.run();
@@ -625,8 +692,6 @@ public class Main {
 			Function<Point, String> formatPoint = (Point a) ->{
 				return "(" + (int)a.getX() + "," + (int)a.getY() + ")";
 			};
-
-			new DecimalFormat("#.");
 			Pattern a;
 			System.out.println("Zadanie 81.3: ");
 			System.out.println("Max obwód: " + String.format("%.2f", maxObw));
@@ -644,6 +709,8 @@ public class Main {
 				double bokB = wiersz.get(0).distance(wiersz.get(2));
 				double bokC = wiersz.get(1).distance(wiersz.get(2));
 
+
+			new DecimalFormat("#.");
 
 				boolean czyProst = false;
 				if(bokA * bokA + bokB * bokB == bokC * bokC) {
@@ -673,6 +740,24 @@ public class Main {
 	}
 	
 	private static void test() throws Exception {
+		
+//		    HashSet<ArrayList<Integer>> secik = new HashSet<ArrayList<Integer>>();
+//		    for(int i=-37; i<=0; i++){
+//		    	for(int j=-37; j<=0; j++){
+//		    		for(int k=-37; k<=0; k++){
+//		    			if(i+k+j == -37) {
+//		    				ArrayList<Integer> ciag = new ArrayList<Integer>();
+//		    				Collections.addAll(ciag, i, j, k);
+//		    				secik.add(ciag);
+//		    			}
+//		    		}
+//		    	}
+//		    }
+//		    secik.stream().forEach((ArrayList<Integer> ciag) -> {
+//		    	System.out.println(ciag);
+//		    });
+//		    System.out.println(secik.size());
+
 	}
 	
 	public static void main(String[] args) {
@@ -680,7 +765,7 @@ public class Main {
 			zadanie58();
 //			zadanie59();
 //			zadanie60();
-//			zadanie61();
+			zadanie61();
 //			zadanie62();
 //			zadanie63();
 //			zadanie64();

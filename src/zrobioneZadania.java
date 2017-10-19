@@ -14,7 +14,7 @@ public enum zrobioneZadania {
 	
 	_61_1(true),
 	_61_2(true),
-	_61_3(false),
+	_61_3(true),
 	
 	_62_1(true),
 	_62_2(true),
