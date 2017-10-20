@@ -542,9 +542,11 @@ public class Main {
 	private static void zadanie63() throws Exception {
 		Scanner plikCiagi = new Scanner(new File("Files/63/ciagi.txt"));
 		ArrayList<String> ciagi = new ArrayList<String>();		
-		
+		ArrayList<Integer> ciagiJakoLiczby = new ArrayList<Integer>();
 		while(plikCiagi.hasNext()) {
+			String next = plikCiagi.next();
 			ciagi.add(plikCiagi.next());
+			ciagiJakoLiczby.add(Integer.parseInt(next, 2));
 		}
 		
 		Runnable pp1 = () -> {
@@ -574,7 +576,33 @@ public class Main {
 			System.out.println(ileBezDwochJedynekObokSiebie);
 		};
 		Runnable pp3 = () -> {
+			Function<Integer,ArrayList<Integer>> getPrimeFacotrs = (number) ->{
+				ArrayList<Integer> primeFactors = new ArrayList<Integer>();
+				for(int i=2; i<=number; i++) {
+					if(number % i == 0) {
+						primeFactors.add(i);
+						number /= i;
+						i=1; // will be 2 after continue
+						continue;
+					}
+				}
+				return primeFactors;
+			};
 			
+			ArrayList<Integer> halfPrimes = new ArrayList<Integer>();
+			
+			for(int liczba : ciagiJakoLiczby) {
+				ArrayList<Integer> primeFactors = getPrimeFacotrs.apply(liczba);
+				if(primeFactors.size() == 2) {
+					halfPrimes.add(liczba);
+				}
+			}
+			
+			System.out.println("63.3:");
+			System.out.println("Iloœæ liczb pó³pierwszych: " + halfPrimes.size());
+			Collections.sort(halfPrimes);
+			System.out.println("Najmniejsza liczba pó³pierwsza: " + halfPrimes.get(0));
+			System.out.println("Najwiêksza liczba pó³pierwsza: " + halfPrimes.get(halfPrimes.size()-1));
 		};
 		pp1.run();
 		pp2.run();
@@ -767,7 +795,7 @@ public class Main {
 //			zadanie60();
 //			zadanie61();
 //			zadanie62();
-//			zadanie63();
+			zadanie63();
 //			zadanie64();
 			test();
 		} catch(Exception ex) {
