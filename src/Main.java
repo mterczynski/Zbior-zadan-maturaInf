@@ -765,7 +765,7 @@ public class Main {
 			zadanie58();
 //			zadanie59();
 //			zadanie60();
-			zadanie61();
+//			zadanie61();
 //			zadanie62();
 //			zadanie63();
 //			zadanie64();
