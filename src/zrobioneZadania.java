@@ -100,9 +100,9 @@ public enum zrobioneZadania {
 	_80_2(false),
 	_80_3(false),
 	
-	_81_1(false),
-	_81_2(false),
-	_81_3(false),
+	_81_1(true),
+	_81_2(true),
+	_81_3(true),
 	_81_4(false),
 	_81_5(false),
 	

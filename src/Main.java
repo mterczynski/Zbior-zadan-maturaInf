@@ -1,4 +1,4 @@
-import Zadania.Zadanie64;
+import Zadania.Zadanie81;
 
 public class Main {	
 	public static void main(String[] args) {
@@ -10,8 +10,8 @@ public class Main {
 //		new Zadanie62();
 //		new Zadanie63();
 //		new Zadanie63();
-		new Zadanie64();
+//		new Zadanie64();
 //		new Zadanie79();
-//		new Zadanie81();
+		new Zadanie81();
 	}
 }
