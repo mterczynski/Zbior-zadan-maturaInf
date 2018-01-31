@@ -128,7 +128,6 @@ public class Zadanie66 {
 			}
 		}
 		
-		
 		System.out.println("66.4: ");
 		
 		int maxLen = 0;
