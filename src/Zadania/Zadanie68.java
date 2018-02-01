@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 class Para {
 	public Para(String first, String second) {
@@ -100,11 +101,11 @@ public class Zadanie68 {
 	}
 	
 	void pp3() {
-		HashMap<HashMap<String, Integer>, Integer> mapa_ile = new HashMap<HashMap<String, Integer>, Integer>();
+		HashMap<String, Integer> anagram_ile = new HashMap<String, Integer>();
 		
 		for(Para para : pary) {
-			HashMap<String, Integer> znak_ileWPierwszym = new HashMap<String, Integer>();
-			HashMap<String, Integer> znak_ileWDrugim = new HashMap<String, Integer>();
+			TreeMap<String, Integer> znak_ileWPierwszym = new TreeMap<String, Integer>();
+			TreeMap<String, Integer> znak_ileWDrugim = new TreeMap<String, Integer>();
 			
 			// pobranie ilosci znakow:
 			
@@ -123,18 +124,40 @@ public class Zadanie68 {
 					znak_ileWDrugim.put(para.second.charAt(i)+"", znak_ileWDrugim.get(para.second.charAt(i)+"") + 1); 
 				}
 			}
-
-			if(mapa_ile.containsValue(znak_ileWPierwszym)) {
-				mapa_ile.put(znak_ileWPierwszym, mapa_ile.get(znak_ileWPierwszym) + 1);
-			} else {
-				mapa_ile.put(znak_ileWPierwszym, 1);
+			
+			String anagram1 = "";
+			String anagram2 = "";
+			
+			for(Entry litera: znak_ileWPierwszym.entrySet()) {
+				for(int i=0; i<(int)litera.getValue(); i++) {
+					anagram1 += litera.getKey();
+				}
 			}
 			
-			if(mapa_ile.containsValue(znak_ileWDrugim)) {
-				mapa_ile.put(znak_ileWDrugim, mapa_ile.get(znak_ileWDrugim) + 1);
-			} else {
-				mapa_ile.put(znak_ileWDrugim, 1);
+			for(Entry litera: znak_ileWDrugim.entrySet()) {
+				for(int i=0; i<(int)litera.getValue(); i++) {
+					anagram2 += litera.getKey();
+				}
 			}
-		}		
+			
+			if(!anagram_ile.containsKey(anagram1)) {
+				anagram_ile.put(anagram1, 0);
+			}
+			
+			if(!anagram_ile.containsKey(anagram2)) {
+				anagram_ile.put(anagram2, 0);
+			}
+			
+			anagram_ile.put(anagram1, anagram_ile.get(anagram1) + 1);
+			anagram_ile.put(anagram2, anagram_ile.get(anagram2) + 1);	
+		}
+		
+		int maxVal = 0;
+		
+		for(Entry entry : anagram_ile.entrySet()) {
+			maxVal = Math.max(maxVal, (int)entry.getValue());
+		}	
+		
+		System.out.println("68.3: " + maxVal);
 	}
 }
