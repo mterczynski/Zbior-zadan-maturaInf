@@ -45,8 +45,8 @@ public enum zrobioneZadania {
 	_67_3(false),
 	_67_4(false),
 	
-	_68_1(false),
-	_68_2(false),
+	_68_1(true),
+	_68_2(true),
 	_68_3(false),
 	
 	_69_1(false),
