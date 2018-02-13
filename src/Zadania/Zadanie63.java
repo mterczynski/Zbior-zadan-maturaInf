@@ -23,7 +23,7 @@ public class Zadanie63 {
 		
 		while(plikCiagi.hasNext()) {
 			String next = plikCiagi.next();
-			ciagi.add(plikCiagi.next());
+			ciagi.add(next);
 			ciagiJakoLiczby.add(Integer.parseInt(next, 2));
 		}
 		
@@ -77,6 +77,10 @@ public class Zadanie63 {
 			}
 			return primeFactors;
 		};
+		
+		Collections.sort(ciagiJakoLiczby);
+		Collections.reverse(ciagiJakoLiczby);
+		System.out.println(ciagiJakoLiczby);
 		
 		ArrayList<Integer> halfPrimes = new ArrayList<Integer>();
 		
