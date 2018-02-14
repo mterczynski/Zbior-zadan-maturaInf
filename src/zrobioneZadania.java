@@ -70,14 +70,14 @@ public enum zrobioneZadania {
 	_73_2(false),
 	_73_3(false),
 	
-	_74_1(false),
-	_74_2(false),
-	_74_3(false),
-	_74_4(false),
+	_74_1(true),
+	_74_2(true),
+	_74_3(true),
+	_74_4(true),
 	
-	_75_1(false),
-	_75_2(false),
-	_75_3(false),
+	_75_1(true),
+	_75_2(true),
+	_75_3(true),
 	
 	_76_1(false),
 	_76_2(false),
