@@ -248,5 +248,41 @@ public class Zadanie86 {
 		System.out.println("88.4 b): ");
 		System.out.println(komitet_glosy);
 	}
-	void pp5() {}
+	void pp5_sub(int iloscMandatow) {
+		for(int i=0; i<=50000; i++) {
+			
+			int glosyQ = i;
+			int glosyR = 100000 - i;
+			
+			int ileMandatowQ = 0;
+			int ileMandatowR = 0;
+			int pozostalychMandatow = iloscMandatow;
+			
+			while(pozostalychMandatow > 0) {
+				if(ileMandatowQ == iloscMandatow/2) {
+					System.out.println("Dla m = " + iloscMandatow/2 + " minimalna iloœæ g³osów: " + glosyQ);
+					i = 50000 + 1;
+					break;
+				}
+				int wspolczynnikQ = glosyQ / (2*ileMandatowQ + 1);
+				int wspolczynnikR = glosyR / (2*ileMandatowR + 1);
+				if(wspolczynnikQ >= wspolczynnikR) {
+					ileMandatowQ++;
+				} else {
+					ileMandatowR++;
+				}
+				pozostalychMandatow--;
+			}
+			if(ileMandatowQ == iloscMandatow/2) {
+				System.out.println("Dla m = " + iloscMandatow/2 + " minimalna iloœæ g³osów: " + glosyQ);
+				break;
+			}
+		}
+	};
+	void pp5() {
+		System.out.println("86.5: ");
+		pp5_sub(20);
+		pp5_sub(40);
+		pp5_sub(100);
+	}
 }

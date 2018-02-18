@@ -133,7 +133,7 @@ public enum zrobioneZadania {
 	_86_2(true),
 	_86_3(true),
 	_86_4(true),
-	_86_5(false),
+	_86_5(true),
 	
 	_87_1(false),
 	_87_2(false),
